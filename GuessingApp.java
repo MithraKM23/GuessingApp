@@ -1,16 +1,34 @@
-/*
-*author Developer
-*version 4
+
+/** MAIN CLASS
+* 
+* use Case 5: Game Result Storage
+*
+* This class coordinatesthe complete game flow and persists the final result aftre completion
+*
+* @author Developer
+* @version 5.0
 */
-import java.util.*;
 public class GuessingApp{
 	public static void main(String[] args) throws InvalidInputException{
-		System.out.println("Welcome to the guessing App");
-		GameConfig gameconfig=new GameConfig();
-		gameconfig.showRules();
 		Scanner scanner=new Scanner(System.in);
-		int attempts=0;
-		while(attempts<confg.getMaxAttempts())
+		System.out.println("===========================");
+		System.out.println("Welcome to the Guessing App");
+		System.out.println("============================");
+		/*
+		*Player name is captured once
+		* and stored along with game results.
+		*/
+		System.out.print("Enter Player Name: ");
+		String player = scanner.nextLine();
+		GameConfig config=new GameConfig();
+		config.showRules();
+		int attempts = 0;
+		int hintsUsed = 0;
+		/*
+		*Tracks whether the user successfully gussed the number.
+		*/
+		boolean win=false;
+		while(attempts<config.getmaxAttempts())
 		{
 			System.out.println("Enter your Guess:");
 			int guess=scanner.nextInt();
@@ -29,6 +47,6 @@ public class GuessingApp{
 			
 			}
 		}
-			
+		StorageService.saveResult(player, attempts, win);
 	}
 }
