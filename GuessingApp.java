@@ -1,12 +1,12 @@
 
 /** MAIN CLASS
 * 
-* use Case 5: Game Result Storage
+* use Case 6: Game Restart and Exit
 *
-* This class coordinatesthe complete game flow and persists the final result aftre completion
+* This class coordinatesthe complete game lifecycle, allowing the player to replay or exit gracefully.
 *
 * @author Developer
-* @version 5.0
+* @version 6.0
 */
 public class GuessingApp{
 	public static void main(String[] args) throws InvalidInputException{
@@ -18,6 +18,8 @@ public class GuessingApp{
 		*Player name is captured once
 		* and stored along with game results.
 		*/
+		do
+	{
 		System.out.print("Enter Player Name: ");
 		String player = scanner.nextLine();
 		GameConfig config=new GameConfig();
@@ -47,6 +49,15 @@ public class GuessingApp{
 			
 			}
 		}
+		/*
+		* Final game result is persisted
+		* after the current session ends.
+		*/
 		StorageService.saveResult(player, attempts, win);
+		/**
+		* Player decides whether to
+		* restart the game or exit*/
+		restart = GameController.restartGame(scanner);
+	}while(restart);
 	}
 }
