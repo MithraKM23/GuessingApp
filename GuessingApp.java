@@ -1,10 +1,10 @@
 /*
 *author Developer
-*version 2
+*version 4
 */
 import java.util.*;
 public class GuessingApp{
-	public static void main(String[] args){
+	public static void main(String[] args) throws InvalidInputException{
 		System.out.println("Welcome to the guessing App");
 		GameConfig gameconfig=new GameConfig();
 		gameconfig.showRules();
@@ -16,10 +16,17 @@ public class GuessingApp{
 			int guess=scanner.nextInt();
 			attempts++;
 			String result=GuessValidator.validateGuess(guess,config.getTaregetNumber());
-			System.out.println(result);
-			if("CORRECT".equals(result))
+			//System.out.println(result);
+			if(!"CORRECT".equals(result) && hintsUsed < config.getMaxHints())
 			{
+				hintsUsed++;
+				System.out.println( HintService.generateHint(config.getTargetNumber(), hintsUsed));
+				
+			}
+			System.out.println(result);
+			if("CORRECT".equals(result)){
 				break;
+			
 			}
 		}
 			
